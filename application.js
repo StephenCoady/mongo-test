@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 
 app.get('/test', function(req, res) {
   var myCollection;
+  console.log('hit the test endpoint')
   var db = MongoClient.connect('mongodb://mongodb-1:27017', function(err, db) {
     if (err)
       throw err;
@@ -22,6 +23,14 @@ app.get('/test', function(req, res) {
 var runtimeTimer = Date.now() / 1000;
 var startTime = new Date();
 app.get('/', function(req, res) {
+      var myCollection;
+  console.log('hit the test endpoint')
+  var db = MongoClient.connect('mongodb://mongodb-1:27017', function(err, db) {
+    if (err)
+      throw err;
+    console.log("connected to the mongoDB !");
+    myCollection = db.collection('test_collection');
+  });
   res.send('Application started: '+ startTime +' and is running for '+ (Date.now() / 1000 - runtimeTimer) +' seconds.<br><a href="./test">/test endpoint</a>');
 
 });
